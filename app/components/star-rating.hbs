@@ -1,0 +1,9 @@
+{{#each this.stars as |star|}}
+  {{!-- upon clicking, the @onUpdate function is invoked that will call the setter function in songs.hbs (parent) --}}
+  <button type="button" {{on "click" (fn @onUpdate star.rating) }}>
+    <FaIcon 
+      @icon="star"
+      @prefix={{if star.full "fas" "far"}}
+    />
+  </button>
+{{/each}}

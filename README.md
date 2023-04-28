@@ -4,12 +4,13 @@ This README will serve as a personal notes for myself to maintain my understandi
 
 _**Note:** This personal notes is written in addition to notes from lessons learned while building SuperRentals via Emberjs Tutorial. and building e-commerce website via YouTube Emberjs Tutorial_
 
->> Ember.js's high-value, uncompromising points of view:
->> 1. **URLS are the most distinctive feature of web applications, whether server- or client-side. Thus, any framework worth its salt has to support URLs** -- powerful routers and wide range of features.
->> 2. **Convention over Configuration** -- chief design principle in Ember.
->> 3. **Only code that is worth writing should be written** -- generator for the wins!
->> 4. **Declarative templates and The Rule of Least Power**
->> 5. **Stability without stagnation**
+> > Ember.js's high-value, uncompromising points of view:
+> >
+> > 1.  **URLS are the most distinctive feature of web applications, whether server- or client-side. Thus, any framework worth its salt has to support URLs** -- powerful routers and wide range of features.
+> > 2.  **Convention over Configuration** -- chief design principle in Ember.
+> > 3.  **Only code that is worth writing should be written** -- generator for the wins!
+> > 4.  **Declarative templates and The Rule of Least Power**
+> > 5.  **Stability without stagnation**
 
 ## Conventions
 
@@ -42,7 +43,7 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 
 ## Understanding `{{outlet}}`
 
-> Keyword denotes the place where our site's pages should be rendered into, similar to `{{yield}}` below.
+> Keyword denotes the place where our site's pages should be rendered into, similar to `{{yield}}` below. Outlets are slots in the template where content can be rendered from child routes.
 
 ## Understanding `{{yield}}`
 
@@ -52,6 +53,30 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 
 > An async method known as `model()`. Responsible for fetching and preparing any data for the route. Ember automatically call this hook when entering a route. Also typically housed in routes
 
+## Order of Route Hooks
+
+### beforeModel(transition) {...}
+
+> First `model` hook called with the only parameter it receives is the current route transition
+>
+> Common use case: authentication
+
+### model(params, transition) {...}
+
+> In addition to the transition, this model also receives the params from the URL, which are parsed according to the routing tree
+
+### afterModel(model, transition) {...}
+
+> Once the model is resolved, this hook is called with the model and the transition object
+
+### setupController(controller, model, transition) {...}
+
+> When all of above hooks are called, all run for all levels of the transition, the transition is validated, then this hook is called.
+
+## modelFor Method
+
+> Fetches the model of a parent route that had already been activated.
+
 ## Understanding `...attributes`
 
 > An answer to hard-coding specific values for the `src` and `alt` attributes. this allows arbitrary HTML attributes to be passed in when invoking this component: `<Rental::Image src="..." alt="..."/>` => `<img ...attributes>`
@@ -59,6 +84,10 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 ## Component vs Component-class
 
 > Allow you to optionally associate JavaScript code with a component -- in this case a glimmer component class. Essentially a source code (js) for the supporting component. i.e. `app/component/rental/image.hbs` & `app/component/rental/image.js`
+
+## Understanding `this.args`
+
+> Arguments passed into a component are accessible on `this.args`.
 
 ## Properties & Arguments
 
@@ -71,6 +100,10 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 > _Example:_ `child.hbs` -- from a parent component: `{{@probB}}` (sourced from argument above)
 >
 > _Example:_ `child.hbs` -- in a child component: `{{this.probA}}` (sourced from property in corresponding JavaScript file)
+
+## Data Down Actions Up (DDAU)
+
+> The act of passing data down into a component while using a handler function to communicate upwards to a parent that invoke the component
 
 ## Glimmer component
 
@@ -117,6 +150,14 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 >   - `{{#unless}} content... {{else}} content... {{/unless}}` - for unless/else block scope
 >   - `{{#unless}} content... {{else if}} content... {{/unless}}` - for unless/else if block scope
 > - `{{ each` - essentially a for loop - `{{#each list as |item|}} <li>item.attr</li> {{/each}}`
+
+## Understanding setupController
+
+> A hook that comes in handy when you want to set properties on the controller (from the routes)
+
+## Understanding resetController
+
+> A hook used to update controller properties when moving between routes. It's called on the route everytime a route transition is initiated.
 
 ## Ember Services
 
@@ -195,8 +236,9 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 > `ember g service <name>`
 
 ### Adapter & Serializer generator
+
 > `ember g adapter <name>`
-> 
+>
 > `ember g serializer <name>`
 
 ### Acceptance Test generator
@@ -206,3 +248,7 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 ### Component Test generator
 
 > `ember generate component-test <name>`
+
+## Setting proxy server
+
+> `ember s --proxy=http://...` - minimize need to prepend the host when fetching (for developmental purpose only)
