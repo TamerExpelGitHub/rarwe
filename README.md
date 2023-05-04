@@ -185,11 +185,11 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 >
 > Automated testing URL: [`http://localhost:7357/`](http://localhost:7357/)
 >
-> - **Acceptance test:** test the _work flow_ of an application. Since a page can take time to load, we use `async/await` to ensure that each step wait its turn before moving on.
+> - **Acceptance test:** test the _work flow_ of an application. Since a page can take time to load, we use `async/await` to ensure that each step wait its turn before moving on. Other words, an automated process that exercises the whole system. These tests automate user actions to cut down on testing time, to prevent user error in the test process, and to compose a test suite that can prevent regression.
 >
-> - **Component test:**, also known as rendering (integration) test used to render and test a single component at a time.
+> - **Component test:**, also known as rendering (integration) test used to render and test a single component at a time. As the description implied, a good fit for component _and_ helper tests as these tests verify that they render when invoked with different parameters and how they react to events.
 >
-> - **Unit test:** doesn't actually render anything. It instantiates the model object and tests the model object directly, manipulating its attributes and asserting their value.
+> - **Unit test:** doesn't actually render anything. It instantiates the model object and tests the model object directly, manipulating its attributes and asserting their value. A unit test essentially sits at the lowest level of the testing pyramid: it tests the entity (more informally: _the thing_) in isolation. Some of the pieces of Ember apps -- suitable for unit testing are services, controllers, and models.
 >
 > `beforeEach` is a hook used to share boilerplate code, that allows you to have two tests that each focus on different, single aspect of the component. `beforeEach` runs once before each test function which is an ideal place to set up anything that might be needed by all test cases in the file.
 

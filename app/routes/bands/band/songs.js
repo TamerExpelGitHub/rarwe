@@ -1,9 +1,17 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import Song from 'rarwe/models/song';
 
 export default class SongsRoute extends Route {
   @service catalog; // name match service file, injected to gain access to catalog store
+
+  queryParams = {
+    sortBy: {
+      as: 's',
+    },
+    searchTerm: {
+      as: 'q',
+    },
+  };
 
   async model() {
     let band = this.modelFor('bands.band'); // collect data fetched from app/routes/bands/band.js file
