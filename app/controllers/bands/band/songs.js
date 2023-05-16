@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-
+import { capitalize } from 'rarwe/helpers/capitalize';
 export default class BandsBandSongsController extends Controller {
   @tracked showAddSong = true;
   @tracked title = '';
@@ -38,6 +38,11 @@ export default class BandsBandSongsController extends Controller {
 
       return 0;
     });
+  }
+
+  get newSongPlaceholder() {
+    let bandName = this.model.name;
+    return `New ${capitalize([bandName])} song`;
   }
 
   @action
